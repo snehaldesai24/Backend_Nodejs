@@ -1,0 +1,560 @@
+List of  Node.js interview questions:
+
+1. What is Node.js and why is it used?
+Answer: Node.js is a powerful, open-source, server-side runtime environment built on Chrome's V8 JavaScript engine. It enables developers to use JavaScript to write server-side code, which traditionally was handled by other languages like PHP, Python, or Java. This allows for JavaScript to be used across the entire stack(i.e, frontend and backend), promoting a unified development experience.
+
+Node.js is particularly known for its non-blocking, event-driven(means that the system responds to events (like user actions or network requests) and processes them asynchronously, allowing the application to handle multiple tasks concurrently without blocking other operations) architecture. This means it can handle multiple requests concurrently without waiting for each one to complete before starting the next. This makes Node.js highly efficient and suitable for building scalable network applications, such as real-time chat applications, online gaming, and APIs that need to handle many connections simultaneously.
+
+One of the standout features of Node.js is its package manager, npm, which provides access to a vast ecosystem of libraries and packages that can significantly accelerate development. Its asynchronous nature and event loop model make it ideal for I/O-heavy tasks, such as reading files, querying databases, or making network requests, as it can handle these operations without blocking other tasks.
+
+Analogy:
+Think of Node.js as a highly efficient restaurant kitchen. Imagine a kitchen where the chef (Node.js) can start preparing a dish, then immediately move on to the next order without waiting for the first dish to be fully cooked before starting the next. This way, the kitchen can handle many orders simultaneously, ensuring that all dishes are served quickly and efficiently. Similarly, Node.js handles multiple client requests simultaneously, ensuring that your server remains responsive and capable of managing a high volume of interactions.
+
+-----------------------------------------------------------------------------------
+2. Explain the event-driven architecture of Node.js.
+Answer: The event-driven architecture of Node.js is one of its most powerful features. At its core, Node.js uses an event loop to handle asynchronous operations, which is key for scalability. When a request comes in, instead of blocking the entire process to wait for a response, Node.js registers the event (like reading from a file or querying a database) and moves on to handle other requests. Once the operation is complete, the registered callback function is executed. This is what makes Node.js non-blocking, allowing it to handle thousands of concurrent connections efficiently.
+
+The core idea is that Node.js doesn’t wait for any I/O operations to complete. Instead, it assigns tasks, listens for events, and responds when they’re ready, making it highly suitable for building fast, scalable applications.
+
+Analogy: 
+Think of Node.js as a restaurant with one chef who’s really good at multitasking. Instead of waiting around for the oven to finish cooking or the water to boil, the chef starts preparing other orders. When something is done (like the oven timer going off), the chef quickly attends to it without pausing all the other work. This way, the kitchen runs smoothly, and multiple meals can be prepared at the same time.
+-----------------------------------------------------------------------------------
+3. What are the main features of Node.js?
+
+Answer: 1. Non-blocking, Asynchronous I/O: One of the core strengths of Node.js is its non-blocking, asynchronous nature. This means it can handle multiple tasks at once without waiting for one to complete before moving on to the next. For instance, if it makes a database request, it won’t just sit idle until the response comes back. Instead, it'll keep working on other tasks, and once the data is ready, it'll come back to process it.
+Example: Imagine you’re hosting a dinner party and waiting for food to be delivered. Instead of standing by the door waiting, you continue chatting with guests or setting the table. When the food arrives, you pause, get it, and then continue with your tasks.
+
+2. Single-threaded Event Loop: Node.js runs on a single thread, unlike many other platforms that use multiple threads to handle tasks. It achieves high performance by using an event loop. The event loop constantly checks for tasks in the queue and processes them efficiently, making it highly scalable for I/O-heavy applications.
+Example: It's like having one cashier in a store, but instead of waiting to process every customer one-by-one, the cashier quickly deals with customers who are ready and then goes back to help others once they're ready (like if someone’s waiting for a price check).
+
+3. V8 Engine: Node.js runs on Google’s V8 JavaScript engine, the same engine used in Chrome. V8 is known for its speed and efficiency in executing JavaScript. It takes JavaScript code and compiles it into machine code that your computer understands, leading to fast performance.
+Example: It’s like having a top-tier chef in your kitchen who can quickly take recipes (JavaScript code) and turn them into gourmet meals (machine code) in no time.
+
+4. NPM (Node Package Manager): Node.js comes with NPM, a huge library of packages and modules. These packages are reusable pieces of code that other developers have created. It saves you a lot of time by allowing you to quickly integrate pre-built functionalities into your project.
+Example: It’s like having a fully stocked toolbox when working on a project. Instead of creating every tool from scratch, you can simply grab what you need and focus on the bigger task.
+
+5. Cross-platform Compatibility: Node.js works on various platforms like Windows, Linux, and macOS, allowing developers to build cross-platform applications without worrying about different operating systems. 
+Example: It’s like writing a single recipe that works for cooking in both electric and gas stoves without any changes!
+
+Real Time Usecase:
+Think of Node.js like a food delivery app that handles thousands of orders simultaneously. Instead of having one person delivering food to one house at a time, it sends out multiple delivery drivers (tasks) while keeping track of every order (event loop). It never waits for one driver to return before sending out the next—it’s all about efficiency, speed, and handling many things at once!
+
+-----------------------------------------------------------------------------------
+4. How does Node.js handle asynchronous operations?
+
+Answer: Node.js uses something called non-blocking I/O with an event-driven architecture, meaning it can handle multiple operations at the same time without waiting for one to finish before starting another.
+Let me explain that with an example. Say you are building a web server in Node.js, and you need to read some files from the disk. If Node.js handled things synchronously (like traditional programming languages), it would wait for the file reading operation to finish before moving on to the next task. This would make the server slow, especially if it had multiple tasks to perform.
+But in Node.js, operations like reading files, making network requests, or querying databases are asynchronous. When you tell Node.js to read a file, it sends the request to the file system and immediately moves on to handle the next task, without waiting. Once the file is read, Node.js gets notified through a callback, promise, or async/await mechanism, and then it processes the result.
+This is achieved using the event loop and callbacks. The event loop is like a queue where tasks are lined up and executed when their results are ready. Node.js doesn’t block or freeze waiting for things to finish; instead, it keeps working on other tasks.
+
+For example, imagine you're a waiter at a restaurant. When you take an order from a customer, you don’t wait in the kitchen until the food is ready. Instead, you go to other tables and take more orders, bring drinks, etc. Once the kitchen tells you the food is ready, you go back to serve it. Node.js works similarly: it doesn’t wait around, it keeps doing other things and comes back when the result is ready.
+
+-----------------------------------------------------------------------------------
+5.Interviewer: What is the role of the event loop in Node.js?
+
+Answer: The event loop is a core part of Node.js's asynchronous architecture, responsible for handling non-blocking I/O operations. Node.js uses a single-threaded event-driven model, where the event loop allows it to manage multiple tasks concurrently without creating additional threads for each request. The event loop listens for incoming events (such as file reads, HTTP requests, or database queries) and delegates tasks to be executed by background workers or the operating system. Once these operations complete, the results are returned to the event loop, which then executes the appropriate callback functions in a sequential manner. This design ensures that Node.js can handle large numbers of I/O-bound operations efficiently, maintaining high performance even under heavy loads.
+
+Real time example...
+Think of the event loop as a restaurant manager. The manager (event loop) takes orders (tasks) from customers (incoming requests) and delegates them to chefs (background workers or OS processes). While the chefs are preparing meals (handling operations like reading from a file or querying a database), the manager continues taking orders from other customers without having to wait. When the meals are ready, the manager serves them to the appropriate customer (executes the callback), ensuring that every order is processed in the order it was received. This way, the manager keeps the restaurant running smoothly, attending to many customers simultaneously without being overwhelmed.
+-----------------------------------------------------------------------------------
+6. What is a callback function in Node.js?
+
+Answer :A callback function in Node.js is a function passed as an argument to another function, which is then executed after the completion of the task. This approach is fundamental in handling asynchronous operations, such as reading files, making API requests, or interacting with databases. In Node.js, callbacks are a key part of non-blocking I/O, allowing the system to move on to other tasks while waiting for the completion of an operation. Once the operation is finished, the callback is invoked to process the result or handle any errors that occurred. For example, when reading a file using the `fs.readFile()` method, a callback function is provided to handle the data once the file has been read. This prevents the application from being blocked while the file is read from the disk.
+
+Real time example:
+Think of a callback function like placing an order at a coffee shop. After ordering, you don't stand and wait at the counter, blocking others from ordering. Instead, you move to a table or go about your day, and the barista will call your name (invoke the callback) when the coffee is ready. Similarly, Node.js allows the main thread to continue executing other tasks, and once the asynchronous operation is complete, the callback is "called" to notify the system.
+-----------------------------------------------------------------------------------
+7. Explain the concept of Promises in Node.js.
+Answer: In Node.js, a Promise is an object that represents the eventual completion (or failure) of an asynchronous operation and its resulting value. Promises provide a more powerful and flexible way to handle asynchronous operations compared to traditional callbacks. They allow you to write asynchronous code in a more synchronous manner, improving readability and maintainability.
+A Promise has three states:
+1. Pending: The initial state of the Promise, before the asynchronous operation has completed.
+2. Fulfilled: The state when the asynchronous operation completes successfully, and the Promise is resolved with a value.
+3. Rejected: The state when the asynchronous operation fails, and the Promise is rejected with a reason (error).
+
+Promises offer two main methods to handle the results of the asynchronous operation:
+- .then(): Used to define what should happen when the Promise is fulfilled.
+- .catch(): Used to define what should happen when the Promise is rejected.
+The chaining of these methods allows for a more linear flow of asynchronous code, as opposed to nested callbacks, which can lead to "callback hell."
+
+Real time example-
+Think of a Promise like a restaurant order. When you place an order (create a Promise), you’re waiting for your food (asynchronous operation) to be prepared. The restaurant promises to deliver your food. While waiting, you can go about other tasks (continue executing other code). Once your food is ready, the restaurant either delivers it to your table (Promise is fulfilled) or informs you of a problem (Promise is rejected). In either case, you’re not stuck waiting idly; you can plan your next steps based on whether your order arrives as expected or not.
+-----------------------------------------------------------------------------------
+8. What is the purpose of the `async` and `await` keywords in Node.js?
+Answer: The async and await keywords in Node.js are used to simplify working with asynchronous operations. In JavaScript, many functions like network requests or file operations are asynchronous, meaning they don't block the main thread while waiting for a response. Traditionally, this was handled using callbacks or promises, which could sometimes result in complex and less readable code, especially when dealing with multiple asynchronous actions.
+The async keyword is used to declare a function that returns a promise. Inside an async function, the await keyword can be used to pause the execution of the code until the promise is resolved or rejected. This allows developers to write asynchronous code that looks and behaves like synchronous code, making it easier to read and maintain. If the promise resolves, the result is returned; if it rejects, the error can be caught using a try-catch block.
+
+For example:
+async function fetchData() {
+ try {
+  const data = await getDataFromAPI();
+  console.log(data);
+ } catch (error) {
+  console.error(error);
+ }
+}
+In this example, the await keyword ensures that the code execution waits for the getDataFromAPI() function to complete before moving forward.
+
+Real time example:
+Think of async and await like ordering food at a restaurant. Normally, you’d place your order, and while you wait for the food, you can continue having a conversation (other code execution continues). However, if you use await, it's as if you're putting your conversation on hold until your food arrives. Once the food is served, the conversation resumes. This approach helps prevent you from getting overwhelmed by too many interruptions (callback hell), ensuring you can focus on the next task only when the current one is done.
+-----------------------------------------------------------------------------------
+9. How does Node.js handle errors in asynchronous code?
+Answer: In Node.js, error handling in asynchronous code is critical since the event-driven, non-blocking nature of Node.js often results in callbacks or promises. There are different strategies based on whether the asynchronous operation is using callbacks, promises, or async/await syntax.
+
+Callbacks: Errors are typically passed as the first argument in the callback function. This is called the "error-first" callback pattern.
+Promises: Errors can be handled using .catch() for promise rejections.
+Async/Await: You can use try...catch blocks to handle errors when working with asynchronous functions.
+
+// Error handling with callback
+function fetchData(callback) {
+    setTimeout(() => {
+        const error = false; // Simulating no error
+        if (error) {
+            return callback(new Error("Failed to fetch data"));
+        }
+        callback(null, "Data received");
+    }, 1000);
+}
+fetchData((err, data) => {
+    if (err) {
+        return console.error(err.message);
+    }
+    console.log(data);
+});
+
+// Error handling with Promises
+function fetchPromiseData() {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            const error = false; // Simulating no error
+            if (error) {
+                return reject(new Error("Failed to fetch data"));
+            }
+            resolve("Data received via Promise");
+        }, 1000);
+    });
+}
+fetchPromiseData()
+    .then(data => console.log(data))
+    .catch(err => console.error(err.message));
+
+// Error handling with async/await
+async function fetchAsyncData() {
+    try {
+        let data = await fetchPromiseData();
+        console.log(data);
+    } catch (error) {
+        console.error("Error:", error.message);
+    }
+}
+fetchAsyncData();
+
+-----------------------------------------------------------------------------------
+10. What is the difference between synchronous and asynchronous functions  in Node.js?
+Answer: 🔰 Let me explain with you a real time example:
+Think of a restaurant (Node.js) with a single chef. In a synchronous model, the chef handles one order at a time, cooking each meal fully before starting the next. If one meal takes a while, all subsequent orders are delayed. In an asynchronous model, the chef takes multiple orders and begins cooking one meal. While that meal is simmering, they start preparing the next. This method ensures that multiple tasks are handled concurrently, leading to quicker service overall.
+
+🔰 In Node.js, synchronous functions are executed in a strict sequence, meaning each task must complete before the next one begins. If a function, like reading a large file, takes a long time to process, it blocks the entire application, causing other operations to wait and potentially slowing down performance.
+Asynchronous functions allow multiple operations to run at the same time without waiting for each one to finish. This approach uses callbacks, promises, or async/await to handle long-running tasks (such as network requests or database queries) without freezing the application. Asynchronous programming is essential in Node.js to utilize its non-blocking, event-driven architecture, which helps manage many concurrent operations efficiently.
+-----------------------------------------------------------------------------------
+11. What is the purpose of the `require` function in Node.js?
+
+Answer: The require function is used to include external modules in your Node.js application. These modules can be:
+- Built-in modules like fs (file system) or http
+- Third-party modules that are installed via npm (Node Package Manager)
+- Custom modules that you create within your project
+
+When you use require, Node.js will search for the module, load it, and return its exports, making its functionality available for use in the file that required it.
+
+Real time example:
+Think of require as a "delivery service" that brings necessary tools (modules) from different locations to your "construction site" (your app). For instance, if you’re building a house, you need a variety of tools like a hammer, saw, or drill, and you get these from different places (shops). Similarly, require fetches the tools (modules) that you need in your application from different sources.
+
+
+// Requiring a built-in module
+const fs = require('fs'); // file system module
+
+// Requiring a third-party module
+const express = require('express'); // express framework
+
+// Requiring a custom module
+const myModule = require('./myModule'); // relative path to custom module
+
+Difference between require and import:
+- require: This is part of Node.js CommonJS module system. It loads modules synchronously, and it is available in all versions of Node.js.
+  
+- import: This is part of ECMAScript (ES6) modules, which is a newer module system. It allows for asynchronous loading of modules, and you need to enable it in Node.js by setting "type": "module" in your package.json file or by using .mjs file extensions.
+
+
+const fs = require('fs'); // CommonJS style
+import fs from 'fs'; // ES6 style
+
+Key Differences:
+1. Syntax: require uses a function syntax (`const module = require('module')`), while import uses a declarative syntax (`import module from 'module'`).
+2. Loading: require loads modules synchronously (blocking), whereas import can be used to load modules asynchronously (non-blocking).
+3. Usage: require is the default in Node.js (CommonJS), while import follows the ES6 specification and is becoming more widely adopted in modern applications.
+
+When to Use require vs. import:
+- If you’re working on legacy Node.js projects or modules, you'll typically use require.
+- For modern applications that use ES6 and later, you may prefer import due to its cleaner syntax and potential for asynchronous loading.
+-----------------------------------------------------------------------------------
+12. How does Node.js manage modules and dependencies?
+
+📗 In Node.js, modules are reusable blocks of code that can be imported and exported between files. Node.js uses the CommonJS module system, which allows developers to break down complex applications into smaller, manageable pieces. The require function is used to load modules, and the module.exports or exports object is used to export functionalities from a module. 
+📗 Dependencies are external libraries or modules that a project needs in order to function. Node.js manages these dependencies via npm (Node Package Manager), which installs the necessary packages and maintains them in a node_modules folder. The project’s dependencies are listed in the package.json file, making it easier to track and install required modules. 
+📗 Real-Time Example- Think of Node.js modules like different departments in a company. Each department (module) is responsible for specific tasks, like sales or marketing. If one department needs information from another (for example, sales needs marketing data), they can request it using require. Dependencies are like the external vendors or tools (e.g., cloud services) that the company relies on to function. These vendors are managed and listed in a central database (package.json), so everyone knows what tools or vendors are being used.
+-----------------------------------------------------------------------------------
+13. What is the CommonJS module system?
+
+When struggling 💡 this question in an interview, think of the CommonJS module system as a way to keep your Node.js code organized and efficient. It’s like having a well-organized toolbox: instead of handling everything at once, you can pick the specific tool (module) you need for the job. 
+Quick Explanation: “The CommonJS module system helps break your Node.js application into manageable, reusable pieces. When you use require, it’s like reaching for a tool in your toolbox to perform a task, ensuring your code stays modular and efficient.” 
+
+Now, let’s dive deeper! The CommonJS module system is the default in Node.js, and it works by treating each file in your application as a separate module. You can import these modules into other files using the require() function and export functionality using module.exports. 
+
+Key Features: 
+1.Encapsulation: Each module runs in its own scope, so variables and functions are private unless explicitly exported. 
+2.Synchronous loading: Modules are loaded one at a time, meaning require() blocks code execution until the module is fully loaded. 
+
+Real time example: Imagine your project as a well-stocked toolbox. Each module is a tool, like a hammer, screwdriver, or wrench. You don’t need all the tools at once—just the right one for the task at hand (i.e., using require() to import a specific module). And, if you invent your own custom tool, you can add it to the toolbox by exporting it (i.e., using module.exports).
+-----------------------------------------------------------------------------------
+14. Explain the concept of middleware in Express.js.
+
+Answer: Middleware in Express.js refers to functions that have access to the request object (req), the response object (res), and the next middleware function in the application’s request-response cycle. These functions can execute code, modify the request and response objects, end the request-response cycle, or call the next middleware in the stack. Middleware is like the backbone of any Express.js application, as it helps in handling tasks such as logging, authentication, error handling, or serving static files. 
+Real-Time Example: 𝐂𝐨𝐧𝐬𝐢𝐝𝐞𝐫 𝐚𝐧 𝐚𝐢𝐫𝐩𝐨𝐫𝐭 𝐬𝐞𝐜𝐮𝐫𝐢𝐭𝐲 𝐜𝐡𝐞𝐜𝐤𝐩𝐨𝐢𝐧𝐭. 𝐖𝐡𝐞𝐧 𝐩𝐚𝐬𝐬𝐞𝐧𝐠𝐞𝐫𝐬 𝐚𝐫𝐫𝐢𝐯𝐞, 𝐦𝐮𝐥𝐭𝐢𝐩𝐥𝐞 𝐜𝐡𝐞𝐜𝐤𝐬 𝐡𝐚𝐩𝐩𝐞𝐧 𝐛𝐞𝐟𝐨𝐫𝐞 𝐭𝐡𝐞𝐲 𝐛𝐨𝐚𝐫𝐝 𝐭𝐡𝐞 𝐟𝐥𝐢𝐠𝐡𝐭. 𝐓𝐡𝐞 𝐟𝐢𝐫𝐬𝐭 𝐜𝐡𝐞𝐜𝐤𝐩𝐨𝐢𝐧𝐭 𝐦𝐚𝐲 𝐜𝐡𝐞𝐜𝐤 𝐲𝐨𝐮𝐫 𝐈𝐃, 𝐭𝐡𝐞 𝐬𝐞𝐜𝐨𝐧𝐝 𝐦𝐚𝐲 𝐬𝐜𝐚𝐧 𝐲𝐨𝐮𝐫 𝐥𝐮𝐠𝐠𝐚𝐠𝐞, 𝐚𝐧𝐝 𝐭𝐡𝐞 𝐭𝐡𝐢𝐫𝐝 𝐦𝐚𝐲 𝐩𝐞𝐫𝐟𝐨𝐫𝐦 𝐚 𝐛𝐨𝐝𝐲 𝐬𝐜𝐚𝐧. 𝐈𝐟 𝐲𝐨𝐮 𝐩𝐚𝐬𝐬 𝐚𝐥𝐥 𝐭𝐡𝐞 𝐜𝐡𝐞𝐜𝐤𝐬, 𝐲𝐨𝐮 𝐩𝐫𝐨𝐜𝐞𝐞𝐝 𝐭𝐨 𝐭𝐡𝐞 𝐛𝐨𝐚𝐫𝐝𝐢𝐧𝐠 𝐠𝐚𝐭𝐞. 𝐌𝐢𝐝𝐝𝐥𝐞𝐰𝐚𝐫𝐞 𝐰𝐨𝐫𝐤𝐬 𝐭𝐡𝐞 𝐬𝐚𝐦𝐞 𝐰𝐚𝐲—𝐞𝐚𝐜𝐡 𝐟𝐮𝐧𝐜𝐭𝐢𝐨𝐧 𝐩𝐞𝐫𝐟𝐨𝐫𝐦𝐬 𝐚 𝐬𝐩𝐞𝐜𝐢𝐟𝐢𝐜 𝐭𝐚𝐬𝐤 𝐛𝐞𝐟𝐨𝐫𝐞 𝐩𝐚𝐬𝐬𝐢𝐧𝐠 𝐭𝐡𝐞 𝐫𝐞𝐪𝐮𝐞𝐬𝐭 𝐭𝐨 𝐭𝐡𝐞 𝐧𝐞𝐱𝐭 𝐨𝐧𝐞, 𝐣𝐮𝐬𝐭 𝐥𝐢𝐤𝐞 𝐚𝐢𝐫𝐩𝐨𝐫𝐭 𝐬𝐞𝐜𝐮𝐫𝐢𝐭𝐲 𝐬𝐭𝐞𝐩𝐬. 
+const express = require('express'); const app = express(); // A middleware that logs request details app.use((req, res, next) => { console.log(`Request Method: ${req.method}, Request URL: ${req.url}`); next(); // Pass the request to the next middleware or route handler }); // A middleware that checks if user is authenticated app.use((req, res, next) => { const isAuthenticated = true; // Dummy authentication logic if (isAuthenticated) { next(); // Proceed if authenticated } else { res.status(401).send('Unauthorized'); } }); // Route handler app.get('/', (req, res) => { res.send('Welcome to the home page!'); }); app.listen(3000, () => { console.log('Server is running on port 3000'); });
+-----------------------------------------------------------------------------------
+15. How can you handle uncaught exceptions in Node.js?
+Answer: In Node.js, uncaught exceptions occur when an error is thrown but not caught within any try-catch block, potentially causing the application to crash. It is critical to handle these exceptions properly to prevent abrupt termination of the app and provide a graceful recovery or restart. 
+1. Handling with process.on(uncaughtException): The simplest way to handle uncaught exceptions is by listening to the uncaughtException event of the process object. While this ensures that the app doesn't crash, it should be used cautiously because the application may be in an inconsistent state after such an error. 
+2. Graceful error handling: Instead of just catching all errors, a better approach is to log the error, notify appropriate services, clean up resources, and attempt to shut down the application gracefully. 
+Real time example: Imagine you're driving a car, and suddenly the brakes fail (an error occurs). If you don't have a mechanism in place to handle this situation, like pulling the handbrake (error handling), the car might crash (app crashes). In Node.js, process.on(uncaughtException) acts like a safety measure—when something goes wrong unexpectedly, it helps you pull over safely (graceful shutdown), preventing a disaster. 
+// Uncaught Exception Handler process.on('uncaughtException', (err) => { console.error('An uncaught error occurred!', err); // Clean up resources and shut down gracefully process.exit(1); // Exit the process }); // Simulating an uncaught exception setTimeout(() => { throw new Error('Oops! Something went wrong.'); }, 1000);
+-----------------------------------------------------------------------------------
+16. What are Streams in Node.js and how are they used?
+Streams are a way to handle reading or writing data in a continuous flow instead of reading/writing it all at once. In Node.js, streams are particularly useful for working with large amounts of data, as they process data in chunks, which optimizes memory usage and improves performance.
+
+There are four main types of streams in Node.js:
+
+
+
+-Readable: Streams from which data can be read (e.g., reading a file).
+
+-Writable: Streams to which data can be written (e.g., writing to a file).
+
+-Duplex: Streams that can be both readable and writable (e.g., a TCP socket).
+
+-Transform: Duplex streams that can modify or transform data as it is written and read (e.g., zipping/unzipping data).
+
+
+
+Why Use Streams?
+
+When dealing with large datasets, loading all the data into memory can slow down the system. Streams allow Node.js to process the data as it comes, breaking it into chunks, and avoiding memory overload. This makes it ideal for real-time applications like video/audio streaming or handling massive files.
+
+
+
+Real-time Example:
+
+Think of a stream like a conveyor belt in a factory. Imagine you're packing boxes (data). If all the boxes arrive at once, you'd be overwhelmed and have no space to store them. But if they come in one-by-one on a conveyor belt, you can pack each one efficiently without running out of space.
+
+Similarly, Node.js streams allow data to flow continuously without overwhelming the memory, making the system more efficient.
+
+
+
+Explanation of Code:
+
+-We create a readable stream using fs.createReadStream() to read from a large file.
+
+-The 'data' event is triggered each time a chunk of data is available, and the data is processed chunk-by-chunk instead of loading the entire file into memory at once.
+
+-The 'end' event is triggered when there's no more data to read.
+
+-The 'error' event handles any errors that occur while reading the file.
+
+
+
+Streams provide efficiency and scalability for handling large data sets without overwhelming system memory, making them an essential feature in Node.js for real-time applications and services.
+
+const fs = require('fs');
+
+// Create a readable stream
+const readableStream = fs.createReadStream('largeFile.txt', { encoding: 'utf8' });
+
+// Handle data as it flows in
+readableStream.on('data', (chunk) => {
+  console.log('Received chunk:', chunk);
+});
+
+// Handle when the stream ends
+readableStream.on('end', () => {
+  console.log('No more data.');
+});
+
+// Handle stream errors
+readableStream.on('error', (err) => {
+  console.error('Error while reading file:', err);
+});
+
+-----------------------------------------------------------------------------------
+17. Explain the different types of streams in Node.js.
+Answer: In Node.js, streams are a way to handle reading and writing data piece by piece (in chunks), rather than all at once. This is especially useful when dealing with large amounts of data, such as reading files or handling HTTP requests, as streams make the process more efficient by not loading everything into memory at once.
+
+There are four types of streams in Node.js:
+
+Readable Streams – Used for reading data. For example, fs.createReadStream() is used to read data from a file.
+Writable Streams – Used for writing data. For instance, fs.createWriteStream() is used to write data to a file.
+Duplex Streams – These are both readable and writable. For example, net.Socket in Node.js is a duplex stream, allowing us to send and receive data over a network connection.
+Transform Streams – These allow data to be modified while being read or written. A great example is zlib.createGzip() which compresses data during a stream.
+
+Real-time Example: 
+Imagine you’re downloading a large video file. Instead of waiting for the entire video to download before you can start watching, you can start streaming the video and watch it as the data comes in. This is how Node.js streams work, by handling data in chunks instead of waiting for the complete data.
+
+-----------------------------------------------------------------------------------
+18. What is the purpose of the `process` object in Node.js?
+
+-----------------------------------------------------------------------------------
+19. How can you manage environment variables in Node.js applications?
+
+-----------------------------------------------------------------------------------
+20. What is the role of `package.json` in a Node.js project?
+
+-----------------------------------------------------------------------------------
+21. How do you create and use custom modules in Node.js?
+
+-----------------------------------------------------------------------------------
+22. Explain the concept of the `buffer` in Node.js.
+
+-----------------------------------------------------------------------------------
+23. What are the differences between `Buffer.from()` and `Buffer.alloc()`?
+
+-----------------------------------------------------------------------------------
+24. How does Node.js handle file operations?
+
+-----------------------------------------------------------------------------------
+25. What is the purpose of the `fs` module in Node.js?
+
+-----------------------------------------------------------------------------------
+26. Explain the difference between `fs.readFile` and `fs.createReadStream`.
+
+-----------------------------------------------------------------------------------
+27. What is the role of the `path` module in Node.js?
+
+-----------------------------------------------------------------------------------
+28. How can you parse URLs in Node.js?
+
+-----------------------------------------------------------------------------------
+29. What is the role of the `http` module in Node.js?
+
+-----------------------------------------------------------------------------------
+30. How can you create an HTTP server using Node.js?
+
+-----------------------------------------------------------------------------------
+31. What are the different HTTP methods and their uses?
+
+-----------------------------------------------------------------------------------
+32. How can you make HTTP requests in Node.js?
+
+-----------------------------------------------------------------------------------
+33. Explain the use of the `url` module in Node.js.
+
+-----------------------------------------------------------------------------------
+34. What is Express.js and how does it enhance Node.js?
+
+-----------------------------------------------------------------------------------
+35. How do you handle routing in Express.js?
+
+-----------------------------------------------------------------------------------
+36. What are HTTP status codes and how do you use them in Express.js?
+
+-----------------------------------------------------------------------------------
+37. What is middleware in Express.js and how is it used?
+
+-----------------------------------------------------------------------------------
+38. How can you handle form data in Express.js?
+
+-----------------------------------------------------------------------------------
+39. What are the differences between `req.query`, `req.params`, and `req.body` in Express.js?
+
+-----------------------------------------------------------------------------------
+40. Explain the purpose of `app.use()` in Express.js.
+
+-----------------------------------------------------------------------------------
+41. How can you handle errors in an Express.js application?
+
+-----------------------------------------------------------------------------------
+42. What is CORS and how can you handle it in a Node.js application?
+
+-----------------------------------------------------------------------------------
+43. How do you implement authentication in a Node.js application?
+
+-----------------------------------------------------------------------------------
+44. What is Passport.js and how is it used with Node.js?
+
+-----------------------------------------------------------------------------------
+45. How can you use sessions in a Node.js application?
+
+-----------------------------------------------------------------------------------
+46. What are the different types of databases you can use with Node.js?
+
+-----------------------------------------------------------------------------------
+47. How do you connect to a MongoDB database from a Node.js application?
+
+-----------------------------------------------------------------------------------
+48. What is Mongoose and how does it simplify MongoDB interactions?
+
+-----------------------------------------------------------------------------------
+49. Explain how you would perform CRUD operations in a Node.js application.
+
+-----------------------------------------------------------------------------------
+50. What is the purpose of the `jsonwebtoken` library in Node.js?
+
+-----------------------------------------------------------------------------------
+51. How can you handle file uploads in a Node.js application?
+
+-----------------------------------------------------------------------------------
+52. What are some best practices for error handling in Node.js applications?
+
+-----------------------------------------------------------------------------------
+53. How can you implement logging in a Node.js application?
+
+-----------------------------------------------------------------------------------
+54. What is the role of the `os` module in Node.js?
+
+-----------------------------------------------------------------------------------
+55. How can you perform background tasks in Node.js?
+
+-----------------------------------------------------------------------------------
+56. What are WebSockets and how can you implement them in Node.js?
+
+-----------------------------------------------------------------------------------
+57. How does Node.js handle concurrency?
+
+-----------------------------------------------------------------------------------
+58. What are the benefits of using Node.js for building APIs?
+
+-----------------------------------------------------------------------------------
+59. How can you test Node.js applications?
+
+-----------------------------------------------------------------------------------
+60. What are some popular testing frameworks for Node.js?
+
+-----------------------------------------------------------------------------------
+61. How do you use the `mocha` and `chai` libraries for testing in Node.js?
+
+-----------------------------------------------------------------------------------
+62. What is a memory leak and how can you prevent it in Node.js?
+
+-----------------------------------------------------------------------------------
+63. How can you optimize the performance of a Node.js application?
+
+-----------------------------------------------------------------------------------
+64. What are some common security issues in Node.js applications?
+
+-----------------------------------------------------------------------------------
+65. How can you secure a Node.js application from common vulnerabilities?
+
+-----------------------------------------------------------------------------------
+66. What is the purpose of the `cluster` module in Node.js?
+
+-----------------------------------------------------------------------------------
+67. How can you scale a Node.js application?
+
+-----------------------------------------------------------------------------------
+68. What is Node.js's role in microservices architecture?
+
+-----------------------------------------------------------------------------------
+69. How do you handle concurrency in Node.js?
+
+-----------------------------------------------------------------------------------
+70. What are some tools for monitoring Node.js applications?
+
+-----------------------------------------------------------------------------------
+71. How can you profile a Node.js application for performance bottlenecks?
+
+-----------------------------------------------------------------------------------
+72. What is the purpose of the `child_process` module in Node.js?
+
+-----------------------------------------------------------------------------------
+73. How can you manage and schedule tasks in a Node.js application?
+
+-----------------------------------------------------------------------------------
+74. What is the `stream` module and how do you use it in Node.js?
+
+-----------------------------------------------------------------------------------
+75. Explain the concept of Node.js's non-blocking I/O.
+
+-----------------------------------------------------------------------------------
+76. How do you handle large amounts of data in Node.js?
+
+-----------------------------------------------------------------------------------
+77. What is the purpose of `npm` and how does it differ from `yarn`?
+
+-----------------------------------------------------------------------------------
+78. How can you create a RESTful API using Node.js?
+
+-----------------------------------------------------------------------------------
+79. What is the role of the `assert` module in Node.js?
+
+-----------------------------------------------------------------------------------
+80. How can you use environment variables to configure a Node.js application?
+
+-----------------------------------------------------------------------------------
+81. What are the differences between Node.js and other server-side technologies like Python and Ruby?
+
+-----------------------------------------------------------------------------------
+82. How does Node.js handle backpressure in streams?
+
+-----------------------------------------------------------------------------------
+83. What are some common performance issues in Node.js applications?
+
+-----------------------------------------------------------------------------------
+84. How can you debug a Node.js application?
+
+-----------------------------------------------------------------------------------
+85. What is the role of the `v8` module in Node.js?
+
+-----------------------------------------------------------------------------------
+86. How can you use the `debug` module in Node.js?
+
+-----------------------------------------------------------------------------------
+87. What are the different ways to manage dependencies in Node.js?
+
+-----------------------------------------------------------------------------------
+88. How do you handle cross-platform issues in Node.js?
+
+-----------------------------------------------------------------------------------
+89. How does Node.js integrate with frontend frameworks like React or Angular?
+
+-----------------------------------------------------------------------------------
+90. What are the best practices for structuring a Node.js application?
+
+-----------------------------------------------------------------------------------
+91. How can you use `pm2` for managing Node.js processes?
+
+-----------------------------------------------------------------------------------
+92. What are the security implications of using third-party modules in Node.js?
+
+-----------------------------------------------------------------------------------
+93. How can you implement rate limiting in a Node.js application?
+
+-----------------------------------------------------------------------------------
+94. What are some common patterns for handling asynchronous operations in Node.js?
+
+-----------------------------------------------------------------------------------
+95. How can you create a CLI tool using Node.js?
+
+-----------------------------------------------------------------------------------
+96. How does Node.js manage and optimize garbage collection?
+
+-----------------------------------------------------------------------------------
+97. What are some common pitfalls when working with Node.js?
+
+-----------------------------------------------------------------------------------
+98. How can you implement caching in a Node.js application?
+
+-----------------------------------------------------------------------------------
+99. How can you use the `assert` module for testing in Node.js?
+
+-----------------------------------------------------------------------------------
+100. How do you handle different environments (development, staging, production) in Node.js applications?
+
+-----------------------------------------------------------------------------------
+
