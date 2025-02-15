@@ -1,0 +1,158 @@
+## **Basic Node.js Questions** 
+
+1. What is Node.js?
+- Node.js is an open-source (free and publicly available) and cross-platform (runs on Windows, macOS, and Linux) JavaScript runtime environment that allows JavaScript to run outside the browser.  
+- It is built on Google’s V8 engine, which compiles JavaScript into machine code for fast execution.  
+- It enables full-stack JavaScript development, allowing developers to use JavaScript for both frontend and backend.  
+- Node.js follows a single-threaded, event-driven model, handling multiple requests simultaneously without blocking.  
+- It is powered by libuv, a C++ library that enables non-blocking I/O operations.  
+- Unlike traditional servers, Node.js delegates tasks like database queries and file operations without waiting for them to complete.  
+- The event loop mechanism listens for completed tasks and executes callback functions when data is ready, making it highly efficient.  
+- It uses CommonJS modules (`require()` & `module.exports`) for modular development.  
+- npm (Node Package Manager) provides access to a vast ecosystem of libraries.  
+- Well-suited for microservices architecture, allowing applications to be broken into independent services for better scalability.  
+- Used in real-time applications like chat apps, live streaming platforms, stock market applications, and multiplayer games, utilizing WebSockets for instant data updates.  
+- Supports microservices-based applications like Netflix and Uber, ensuring scalability and independence.  
+- Used in IoT applications such as smart homes (Alexa, Google Nest) and wearable devices (Fitbit, Apple Watch) for efficient data processing.
+
+2. What are the key features of Node.js?
+- Asynchronous & Non-blocking I/O – Handles multiple tasks simultaneously without waiting for previous operations to complete.
+- Single-threaded Event Loop – Uses a single-threaded model with an event-driven approach to manage concurrent operations.
+- Fast Execution – Built on Google’s V8 engine, which compiles JavaScript into machine code for high performance.
+- Cross-platform Compatibility – Works on Windows, macOS, and Linux.
+- Scalability – Supports microservices architecture, allowing applications to be broken into independent services. This helps scale different parts of an application separately, improves fault isolation, and allows teams to develop and deploy services independently. Companies like Netflix and Uber use Node.js for scalable applications.
+- Rich Ecosystem – Offers thousands of third-party libraries via npm.
+- Built-in Modules – Provides core modules like fs, http, path, and crypto for handling common tasks.
+- Efficient Data Streaming – Handles large file transfers and data streaming efficiently.
+- WebSockets Support – Enables real-time communication in apps like chat and gaming.
+
+3. How does Node.js differ from JavaScript in the browser?
+- Node.js runs outside the browser, while JavaScript in the browser runs inside the browser environment.
+- Node.js is mainly used for backend development, whereas browser JavaScript is used for frontend development.
+- Node.js has access to file systems, databases, and the operating system, while browser JavaScript is limited to DOM manipulation and browser APIs.
+- Node.js uses CommonJS modules (require()), while browser JavaScript typically uses ES modules (import/export).
+- Node.js is built on V8 but runs independently, whereas browser JavaScript runs inside the browser’s security constraints.
+
+4. What is the role of V8 in Node.js?
+- V8 is Google's high-performance JavaScript engine used in Chrome and Node.js.
+- It compiles JavaScript into machine code using Just-In-Time (JIT) compilation for faster execution.
+- Provides automatic memory management and garbage collection for performance optimization.
+- Allows Node.js to execute JavaScript outside the browser efficiently.
+
+5. Explain the event-driven architecture in Node.js.
+- Node.js follows an event-driven architecture, meaning it responds to events as they occur rather than executing code sequentially.
+- The Event Loop continuously listens for events such as file reads, API requests, or database queries.
+- Instead of waiting for an operation to complete, Node.js registers event listeners and executes callback functions when data is ready.
+- This approach makes Node.js highly efficient, as it can handle multiple requests without blocking execution.
+- Common examples of event-driven programming in Node.js include handling HTTP requests, reading files, and database queries.
+
+6. What is the difference between asynchronous and synchronous programming in Node.js?
+- Synchronous programming executes code line by line, blocking further execution until a task is completed.
+- Asynchronous programming does not wait for tasks to complete and continues execution, improving efficiency.
+- Node.js is designed to be asynchronous and non-blocking, making it ideal for handling multiple tasks simultaneously.
+- Asynchronous programming improves performance in tasks like file handling, API requests, and database queries.
+
+7. What is the difference between Node.js and other backend technologies like Java or Python?
+- Node.js is single-threaded and event-driven, whereas Java and Python are multi-threaded.
+- Node.js is optimized for I/O-intensive applications, while Java and Python are better suited for CPU-intensive tasks.
+- Node.js is lightweight and efficient for real-time applications, whereas Java is commonly used in enterprise applications and Python in data science and AI.
+- Node.js uses JavaScript, which allows full-stack development, while Java and Python require different languages for frontend and backend.
+- Node.js has npm, Java has Maven/Gradle, and Python has pip for package management.
+
+8. What is NPM (Node Package Manager)?
+- npm (Node Package Manager) is the default package manager for Node.js, used to install and manage JavaScript libraries.
+- Provides access to millions of open-source packages to extend functionality.
+- Comes pre-installed with Node.js.
+- Used to manage dependencies required for a project.
+
+9. How do you install packages using NPM?
+- Install a package globally using npm install -g package-name.
+- Install a package locally for a specific project using npm install package-name.
+- Add a package as a development dependency using npm install package-name --save-dev.
+- Install all dependencies listed in package.json using npm install.
+
+10. What is the difference between dependencies and devDependencies in package.json?
+- Dependencies are required for production and include essential packages like Express, Mongoose, etc.
+- devDependencies are only needed for development and include tools like Jest (for testing) and Nodemon (for automatic restarts).
+- Dependencies are installed when deploying an application, while devDependencies are only installed in development environments.
+
+---
+ 
+## **Node.js Modules & Require System**  
+11. What are Node.js modules?  
+Node.js modules are reusable blocks of code that help organize and structure applications. They can be built-in (like fs, http), third-party (installed via npm), or custom-made. Modules in Node.js follow the modular programming concept, making code more maintainable and reusable.
+
+12. What are CommonJS and ES modules?  
+CommonJS (CJS) and ES Modules (ESM) are two module systems in Node.js:
+CommonJS (CJS): The default module system in Node.js. It uses require() to import and module.exports to export.
+ES Modules (ESM): A modern module system that follows ECMAScript standards. It uses import and export. ESM provides better support for asynchronous loading.
+
+13. How do you create and export a module in Node.js?  
+To create a module in Node.js, you define your functions or objects in a separate file and export them using module.exports or exports.
+// math.js
+function add(a, b) {
+    return a + b;
+}
+module.exports = add;
+Now, you can import this module using:
+const add = require('./math');
+console.log(add(2, 3)); // Output: 5
+
+14. What is the difference between `require` and `import` in Node.js?  
+require(): Used in CommonJS modules, it loads modules synchronously.
+import: Used in ES Modules, it supports asynchronous loading and allows tree-shaking for better performance.
+
+15. What is the purpose of `module.exports` and `exports`?  
+module.exports: The primary way to export values (functions, objects, etc.) from a module.
+exports: A shorthand reference to module.exports. If you directly assign a new value to exports, it will break the reference.
+// Correct usage
+module.exports = { greet: () => console.log("Hello!") };
+// Incorrect usage
+exports = { greet: () => console.log("Hello!") }; // This won't work
+
+16. What are built-in modules in Node.js?  
+Built-in modules are core modules that come with Node.js. Some common ones are:
+fs (File System) – Handles file operations
+http – Creates HTTP servers
+path – Works with file paths
+os – Provides OS-related information
+events – Handles event-driven programming
+
+17. Explain how you would use the `fs` module to read a file in Node.js.  
+The fs module provides methods to read files synchronously and asynchronously.
+Example (Asynchronous method):
+const fs = require('fs');
+fs.readFile('example.txt', 'utf8', (err, data) => {
+    if (err) {
+        console.error(err);
+        return;
+    }
+    console.log(data);
+});
+
+18. How do you handle module caching in Node.js?  
+Node.js caches modules when they are first required to improve performance. The cached module is stored in require.cache.
+To clear the cache and reload a module:
+delete require.cache[require.resolve('./module')];
+const myModule = require('./module');
+This ensures you get a fresh copy of the module instead of the cached version.
+
+19. What is the difference between global and local modules in Node.js?  
+Global modules are installed system-wide using npm install -g <package> and can be used across different projects.
+Local modules are installed within a project directory (node_modules) and are only available to that specific project.
+npm install express  # Local module
+npm install -g nodemon  # Global module
+
+20. How do you create a custom module in Node.js?  
+To create a custom module, define your functionality in a separate file and export it.
+Example:
+// greet.js
+function sayHello(name) {
+    return `Hello, ${name}!`;
+}
+module.exports = sayHello;
+Then, import and use it in another file:
+const greet = require('./greet');
+console.log(greet('Keshav')); // Output: Hello, Keshav!
+---
+ 
